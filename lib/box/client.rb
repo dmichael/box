@@ -146,8 +146,7 @@ module Box
     def try_token_refresh!
       @session.refresh_token!
     rescue OAuth2::Error => e
-      ap e
-      @session = Box.create_session(@session.client_id, @@session.client_secret, @session.access_token, @session.refresh_token)
+      raise "Sorry, could not refresh tokens"
     end
 
     def handle_response(response)
