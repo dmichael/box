@@ -1,3 +1,7 @@
+require 'memoist'
+require 'hashie'
+
+
 require "box/version"
 
 
@@ -44,3 +48,12 @@ module Box
   end
 
 end
+
+require 'box/client'
+require 'box/session'
+require 'box/authorization'
+require 'box/item'
+require 'box/folder'
+require 'box/file'
+
+

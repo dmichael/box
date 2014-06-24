@@ -3,6 +3,7 @@ module Box
 
 
     def self.authorize(config = {})
+      puts '... attempting to authorize with username and password'
       client_id, client_secret = config[:client_id], config[:client_secret]
       username, password = config[:username], config[:password]
 

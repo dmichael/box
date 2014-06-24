@@ -8,8 +8,8 @@ Gem::Specification.new do |spec|
   spec.version       = Box::VERSION
   spec.authors       = ["David Michael"]
   spec.email         = ["david.michael@giantmachines.com"]
-  spec.summary       = %q{TODO: Write a short summary. Required.}
-  spec.description   = %q{TODO: Write a longer description. Optional.}
+  spec.summary       = %q{Write a short summary. Required.}
+  spec.description   = %q{Write a longer description. Optional.}
   spec.homepage      = ""
   spec.license       = "MIT"
 
@@ -24,4 +24,5 @@ Gem::Specification.new do |spec|
   spec.add_dependency "mechanize"
   spec.add_dependency "faraday"
   spec.add_dependency "addressable"
+  spec.add_dependency "hashie"
 end
