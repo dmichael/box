@@ -26,7 +26,6 @@ module Box
         password:      config['password'] || ENV['BOX_PASSWORD']
       }
 
-ap config
       # Box::Authorization.authorize client_id, client_secret
       session = create_session(config)
       Box::Client.new(session)
