@@ -1,6 +1,9 @@
 require 'memoist'
 require 'hashie'
-
+require 'faraday'
+require 'faraday_middleware'
+require 'addressable/uri'
+require 'mechanize'
 
 require "box/version"
 
@@ -15,14 +18,15 @@ module Box
 
     def client(config = {})
       config = {
-        access_token:  config[:access_token] || ENV['BOX_ACCESS_TOKEN'],
-        refresh_token: config[:refresh_token] || ENV['BOX_REFRESH_TOKEN'],
-        client_id:     config[:client_id] || ENV['BOX_CLIENT_ID'],
-        client_secret: config[:client_secret] || ENV['BOX_CLIENT_SECRET'],
-        username:      config[:username] || ENV['BOX_USERNAME'],
-        password:      config[:password] || ENV['BOX_PASSWORD']
+        access_token:  config['access_token'] || ENV['BOX_ACCESS_TOKEN'],
+        refresh_token: config['refresh_token'] || ENV['BOX_REFRESH_TOKEN'],
+        client_id:     config['client_id'] || ENV['BOX_CLIENT_ID'],
+        client_secret: config['client_secret'] || ENV['BOX_CLIENT_SECRET'],
+        username:      config['username'] || ENV['BOX_USERNAME'],
+        password:      config['password'] || ENV['BOX_PASSWORD']
       }
 
+ap config
       # Box::Authorization.authorize client_id, client_secret
       session = create_session(config)
       Box::Client.new(session)
@@ -35,25 +39,22 @@ module Box
 
   end
 
-  class BoxError < StandardError
-  end
-
-  class ArgumentError < BoxError
-  end
-
-  class NameConflict < BoxError
-  end
-
-  class ResourceNotFound < BoxError
-  end
 
 end
 
+require 'box/exceptions'
 require 'box/client'
 require 'box/session'
 require 'box/authorization'
 require 'box/item'
 require 'box/folder'
 require 'box/file'
+
+Box::Session.on_token_refresh = -> (access_token,refresh_token) {
+  puts 'Box::Session.on_token_refresh called with'
+  puts access_token
+  puts refresh_token
+}
+
 
 

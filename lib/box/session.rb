@@ -8,7 +8,7 @@ module Box
 
     class << self
         attr_accessor :on_token_refresh
-        @on_token_refresh = -> (access_token,refresh_token) {puts 'on_token_refresh called with'; puts access_token; puts refresh_token}
+        @on_token_refresh = -> (access_token, refresh_token) {}
     end
 
     OAUTH2_URLS = {
@@ -62,6 +62,8 @@ module Box
         puts "Error authenticating Box -> #{e.message}"
         puts 'Attempting to reauthorize and get new tokens'
         @oauth2_access_token = Box::Authorization.authorize(config)
+        set_tokens!
+        return @oauth2_access_token
       else
         raise e
       end

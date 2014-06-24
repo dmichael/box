@@ -43,7 +43,7 @@ module Box
       params = {fields: 'sha1,name,path_collection,size', limit: LIMIT, offset: 0}.merge(params)
       # Add expected fields and limit
       response = @client.get("/folders/#{id}/items", params)
-
+      ap response
       # Add the results to the total collection
       collection.push *@client.parse_items(response.body)
 

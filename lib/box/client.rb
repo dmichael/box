@@ -1,4 +1,5 @@
-require 'addressable/uri'
+
+
 
 module Box
   class Client
@@ -45,7 +46,7 @@ module Box
 
     # Process the Box "items" returned from a request
     def parse_items(results)
-      return [] if results['entries'].blank?
+      return [] if results['entries'].empty?
       results['entries'].reduce([]) do |entries, entry|
         entries << case entry['type']
           when 'file'   then Box::File.new(self, entry)
@@ -151,6 +152,8 @@ module Box
 
     def handle_response(response)
       case response.status
+        when 400
+          raise Box::MalformedAuthHeaders, response.headers
         when 404
           raise Box::ResourceNotFound, JSON.dump(response.body)
         when 409

@@ -8,7 +8,7 @@ module Box
       username, password = config[:username], config[:password]
 
       agent   = Mechanize::new
-      session = Session.new(client_id, client_secret)
+      session = Session.new(config)
 
       # Get the authorization URL from Box by specifying redirect URL
       # as the arbitrary but working Chase bank home page - this must match the address at Box
