@@ -43,4 +43,5 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'addressable', '<= 2.2.4'
   spec.add_dependency 'hashie'
   spec.add_dependency 'oauth2', '~> 0.9.3'
+  spec.add_dependency 'colorize'
 end

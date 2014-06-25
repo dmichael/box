@@ -21,7 +21,7 @@ module Box
         elsif item.file?
           yield item
         else
-          puts "Unknown item type #{item.id}:#{item.type}"
+          Box.log "Unknown item type #{item.id}:#{item.type}"
         end
       end
     end
@@ -130,7 +130,7 @@ module Box
         # params = {}
       end
 
-      puts "[Box.com] #{method} #{::File.join(Box::API_URL, uri.to_s)}"
+      Box.log "#{method} #{::File.join(Box::API_URL, uri.to_s)}"
       response = connection.send(method.downcase, uri.to_s, params)
 
       case response.status

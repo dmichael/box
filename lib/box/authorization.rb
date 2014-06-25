@@ -8,7 +8,7 @@ module Box
 
       require 'mechanize'
 
-      puts '... attempting to authorize with username and password'
+      Box.log '... attempting to authorize with username and password'
       client_id, client_secret = config[:client_id], config[:client_secret]
 
 

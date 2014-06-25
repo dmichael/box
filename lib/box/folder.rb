@@ -22,15 +22,15 @@ module Box
       folder = subfolder(folder_name)
       return folder unless folder.nil?
 
-      puts "[Box.com] Creating subfolder in #{self.name} for #{folder_name}"
+      Box.log "Creating subfolder in #{self.name} for #{folder_name}"
       response = @client.post('folders', {name: folder_name, parent:{id: self.id}})
 
       if response.status == 201 # created
         folder = Box::Folder.new(@client, response.body)
-        puts "[Box.com] Created folder for #{folder_name} in #{name} as #{folder.id}"
+        Box.log "Created folder for #{folder_name} in #{name} as #{folder.id}"
         folder
       else
-        puts "[Box.com] Error creating folder, #{response.body}"
+        Box.log "Error creating folder, #{response.body}"
         nil
       end
 
@@ -43,7 +43,7 @@ module Box
       params = {fields: 'sha1,name,path_collection,size', limit: LIMIT, offset: 0}.merge(params)
       # Add expected fields and limit
       response = @client.get("/folders/#{id}/items", params)
-      ap response
+
       # Add the results to the total collection
       collection.push *@client.parse_items(response.body)
 
@@ -51,7 +51,7 @@ module Box
       offset      = (LIMIT * (params[:offset] + 1))
 
       if total_count > offset
-        puts "[Box.com] Recursively calling for items in folder #{name} - #{LIMIT}, #{offset}, #{total_count}"
+        Box.log "Recursively calling for items in folder #{name} - #{LIMIT}, #{offset}, #{total_count}"
         return self.items({offset: offset}, collection)
       end
 

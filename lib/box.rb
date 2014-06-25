@@ -29,7 +29,7 @@ module Box
         username:      config['username'] || ENV['BOX_USERNAME'],
         password:      config['password'] || ENV['BOX_PASSWORD']
       }
-  
+
       # Box::Authorization.authorize client_id, client_secret
       session = create_session(config)
       Box::Client.new(session)
@@ -38,6 +38,10 @@ module Box
 
     def create_session(config = {})
       Box::Session.new config
+    end
+
+    def log(message)
+     puts "[Box.com] #{message}".colorize(:color => :magenta, :background => :black)
     end
 
   end
