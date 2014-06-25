@@ -1,8 +1,11 @@
 # coding: utf-8
+lib = File.expand_path('../lib', __FILE__)
+$LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
+require 'box/version'
 
 Gem::Specification.new do |spec|
   spec.name          = 'box-com'
-  spec.version       = '0.0.5'
+  spec.version       = Box::VERSION
   spec.authors       = ['David Michael']
   spec.email         = ['david.michael@giantmachines.com']
   spec.summary       = %q{Write a short summary. Required.}
@@ -37,7 +40,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'mechanize', '2.7.2'
   spec.add_dependency 'faraday', '~> 0.9.0'
   spec.add_dependency 'faraday_middleware', '0.9.1'
-  spec.add_dependency 'addressable', '2.2.4'
+  spec.add_dependency 'addressable', '<= 2.2.4'
   spec.add_dependency 'hashie'
   spec.add_dependency 'oauth2', '~> 0.9.3'
 end
