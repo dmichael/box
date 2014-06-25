@@ -101,7 +101,7 @@ module Box
         'https://upload.box.com/api/2.0/files/content'
       end
 
-      puts "[Box.com] POST #{uri}"
+      Box.log "POST #{uri}"
 
       # Construct the payload
       payload = {
