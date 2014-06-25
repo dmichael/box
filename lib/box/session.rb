@@ -56,7 +56,7 @@ module Box
       Box::Session.on_token_refresh.call(@oauth2_access_token.token, @oauth2_access_token.refresh_token)
       @oauth2_access_token
     rescue OAuth2::Error => e
-      if (e.code == 'invalid_grant') && (e.description == 'Refresh token has expired' || e.description == 'Invalid refresh token')
+      if e.code == 'invalid_client' || ((e.code == 'invalid_grant') && (e.description == 'Refresh token has expired' || e.description == 'Invalid refresh token'))
         raise e if @config[:disable_auth]
         puts "Error authenticating Box -> #{e.message}"
         puts 'Attempting to reauthorize and get new tokens'

@@ -4,6 +4,7 @@
 module Box
   class Client
     VERSION = '2.0'
+    attr_accessor :session
 
     def initialize(session)
       @session = session
@@ -146,7 +147,7 @@ module Box
     def try_token_refresh!
       @session.refresh_token!
     rescue OAuth2::Error => e
-      raise "Sorry, could not refresh tokens"
+      raise "Sorry, could not refresh tokens: #{e.message}"
     end
 
     def handle_response(response)

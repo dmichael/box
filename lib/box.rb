@@ -17,6 +17,10 @@ module Box
     extend Memoist
 
     def client(config = {})
+      # Accounts for both string and Symbol keyed hashes.
+      # This is basically stringify_keys, just less efficient
+      config = Hashie::Mash.new(config)
+      # You can either pass in the config, or set it from the environment variables
       config = {
         access_token:  config['access_token'] || ENV['BOX_ACCESS_TOKEN'],
         refresh_token: config['refresh_token'] || ENV['BOX_REFRESH_TOKEN'],
@@ -25,12 +29,12 @@ module Box
         username:      config['username'] || ENV['BOX_USERNAME'],
         password:      config['password'] || ENV['BOX_PASSWORD']
       }
-
+  
       # Box::Authorization.authorize client_id, client_secret
       session = create_session(config)
       Box::Client.new(session)
     end
-    memoize :client
+    # memoize :client
 
     def create_session(config = {})
       Box::Session.new config
