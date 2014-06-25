@@ -4,6 +4,7 @@ require 'faraday'
 require 'faraday_middleware'
 require 'addressable/uri'
 require 'oauth2'
+require 'colorize'
 
 $LOAD_PATH << File.dirname(__FILE__)
 require 'box/version'
