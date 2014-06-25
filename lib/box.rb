@@ -3,10 +3,10 @@ require 'hashie'
 require 'faraday'
 require 'faraday_middleware'
 require 'addressable/uri'
-require 'mechanize'
+require 'oauth2'
 
-require "box/version"
-
+$LOAD_PATH << File.dirname(__FILE__)
+require 'box/version'
 
 module Box
   API_URL = 'https://api.box.com'
@@ -37,8 +37,6 @@ module Box
     end
 
   end
-
-
 end
 
 require 'box/exceptions'

@@ -1,11 +1,16 @@
+
 module Box
   class Authorization
 
-
     def self.authorize(config = {})
+      username, password = config[:username], config[:password]
+      raise "Unable to get auth tokens without username and password" unless username && password
+
+      require 'mechanize'
+
       puts '... attempting to authorize with username and password'
       client_id, client_secret = config[:client_id], config[:client_secret]
-      username, password = config[:username], config[:password]
+
 
       agent   = Mechanize::new
       session = Session.new(config)

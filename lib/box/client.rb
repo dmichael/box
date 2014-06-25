@@ -125,7 +125,7 @@ module Box
     def request(method, path, params = {}, retries = 0)
       uri = Addressable::URI.parse(::File.join(VERSION, path))
       if method == 'GET'
-        uri.query_values = params
+        uri.query_values = params.reduce({}){|hash, (k,v)| hash[k] = v.to_s; hash}
         # params = {}
       end
 
