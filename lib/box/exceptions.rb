@@ -13,4 +13,4 @@ module Box
 
   class MalformedAuthHeaders < BoxError
   end
-  end
+end

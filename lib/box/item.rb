@@ -27,9 +27,9 @@ module Box
       type == 'file'
     end
 
-    def self.find(id)
-      response = Box.client.get("#{type.pluralize}/#{id}")
-      self.new(Box.client, response.body)
+    def self.find(id, client = Box.client)
+      response = client.get("#{type.pluralize}/#{id}")
+      self.new(client, response.body)
     rescue Box::ResourceNotFound => e
       nil
     end
