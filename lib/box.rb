@@ -56,7 +56,7 @@ require 'box/item'
 require 'box/folder'
 require 'box/file'
 
-Box::Session.on_token_refresh = -> (access_token,refresh_token) {
+Box::Session.on_token_refresh = lambda {|access_token, refresh_token|
   puts 'Box::Session.on_token_refresh called with'
   puts access_token
   puts refresh_token

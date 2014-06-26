@@ -6,7 +6,7 @@ module Box
 
     class << self
         attr_accessor :on_token_refresh
-        @on_token_refresh = -> (access_token, refresh_token) {}
+        @on_token_refresh =  lambda {|access_token, refresh_token| }
     end
 
     OAUTH2_URLS = {
