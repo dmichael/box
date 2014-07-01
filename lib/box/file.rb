@@ -2,11 +2,15 @@ module Box
   class File < Item
     def_delegators :@metadata, :sha1, :name, :size, :etag, :parent
 
-    def self.download_uri(id)
-      response = Box.client.get("/files/#{id}/content")
+    def self.download_uri(id, client = Box.client)
+      response = client.get("/files/#{id}/content")
       uri = nil
       uri = response.headers['location'] if response.status == 302
       uri
+    end
+
+    def download_uri
+      self.class.download_uri(self.id)
     end
 
     def size
