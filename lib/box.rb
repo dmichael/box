@@ -21,6 +21,7 @@ module Box
       # Accounts for both string and Symbol keyed hashes.
       # This is basically stringify_keys, just less efficient
       config = Hashie::Mash.new(config)
+
       # You can either pass in the config, or set it from the environment variables
       config = {
         access_token:  config['access_token'] || ENV['BOX_ACCESS_TOKEN'],
